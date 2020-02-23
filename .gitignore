@@ -1,0 +1,6 @@
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+*.h5
+.ipynb_checkpoints
+Manifest.toml
