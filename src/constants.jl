@@ -1,7 +1,7 @@
 # Source CODATA2018 https://physics.nist.gov/cuu/Constants/
 module Constants
 
-using ..Units
+using ..Units: m, s, c, u, kg, eV, keV, MeV, lm, W, K, m, atm, Torr, Hz, Ω
 
 # import constants defined in Unitful
 using Unitful
@@ -231,7 +231,7 @@ export StandardTemperature, StandardPressure, StandardVolume, MolarWeightOfAir
 
 # Miscellaneous Constants
 const Cs133HyperfineTransitionFrequency = 9192631770Hz
-const ΔνCs = Cs133HyperfineTransitionFrequency
+const ΔνCs133 = Cs133HyperfineTransitionFrequency
 const LuminousEfficacy = 683lm/W
 const Kcd = LuminousEfficacy
 const JosephsonConstant = 2q/h
