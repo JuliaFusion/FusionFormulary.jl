@@ -5,18 +5,38 @@
 const MeV = u"MeV"
 export MeV
 
+# import constants defined in Unitful
+import Unitful: c0, μ0, k, q, ϵ0, ε0, Z0, me, mp, mn, G, gn, h, ħ, μB, Na, R, σ, R∞, μB
+
 # Define Gauss Units
 @unit Gs "Gs" Gauss (1//10_000)T true
 export Gs
 
-import Unitful: uconvert, TemperatureUnits, EnergyUnits, MassUnits, Temperature, Energy, Mass, k, c0
+# Basic Unit Conversion
+import Unitful: uconvert
+unit_convert(a, x) = uconvert(a,x)
 
 # Temperature <--> Energy Conversion 1 J = k_b * 1 K
-uconvert(a::T, x::S) where {T<:EnergyUnits, S<:Temperature} = uconvert(a, uconvert(K,x)*k)
-uconvert(a::T, x::S) where {T<:TemperatureUnits, S<:Energy} = uconvert(a, uconvert(J,x)/k)
+import Unitful: Energy, EnergyUnits
+import Unitful: Temperature, TemperatureUnits
+unit_convert(a::T, x::S) where {T<:EnergyUnits, S<:Temperature} = uconvert(a, uconvert(K,x)*k)
+unit_convert(a::T, x::S) where {T<:TemperatureUnits, S<:Energy} = uconvert(a, uconvert(J,x)/k)
 
-# import constants defined in Unitful
-import Unitful: c0, μ0, k, q, ϵ0, ε0, Z0, me, mp, mn, G, gn, h, ħ, μB, Na, R, σ, R∞, μB
+# Energy <--> Mass Conversion E = mc^2
+import Unitful: Mass, MassUnits
+unit_convert(a::T, x::S) where {T<:EnergyUnits, S<:Mass} = uconvert(a, uconvert(kg,x)*c0^2)/c^2
+
+# Energy <--> Wavelength
+import Unitful: Length, LengthUnits
+unit_convert(a::T, x::S) where {T<:EnergyUnits, S<:Length} = uconvert(a, (h*c0)/uconvert(m,x))
+unit_convert(a::T, x::S) where {T<:LengthUnits, S<:Energy} = uconvert(a, (h*c0)/uconvert(J,x))
+
+# Energy <--> Frequency
+import Unitful: Frequency, FrequencyUnits
+unit_convert(a::T, x::S) where {T<:EnergyUnits, S<:Frequency} = uconvert(a, h*uconvert(Hz,x))
+unit_convert(a::T, x::S) where {T<:FrequencyUnits, S<:Energy} = uconvert(a, uconvert(J,x)/h)
+
+export unit_convert
 
 # Masses and Charges
 const AtomicMassUnit = uconvert(kg, 1u)
