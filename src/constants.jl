@@ -1,42 +1,11 @@
 # Source CODATA2018 https://physics.nist.gov/cuu/Constants/
+module Constants
 
-# Re-export units
-@reexport using Unitful: m, cm, s, kg, g, eV, keV, c, u, b, C, J, A, Hz, rad, T, V, Ω, W, K, Pa, angstrom, Å, cal, atm, Torr, mol, lm
-const MeV = u"MeV"
-export MeV
+using ..Units
 
 # import constants defined in Unitful
-import Unitful: c0, μ0, k, q, ϵ0, ε0, Z0, me, mp, mn, G, gn, h, ħ, μB, Na, R, σ, R∞, μB
-
-# Define Gauss Units
-@unit Gs "Gs" Gauss (1//10_000)T true
-export Gs
-
-# Basic Unit Conversion
-import Unitful: uconvert
-convert_units(a, x) = uconvert(a,x)
-
-# Temperature <--> Energy Conversion 1 J = k_b * 1 K
-import Unitful: Energy, EnergyUnits
-import Unitful: Temperature, TemperatureUnits
-convert_units(a::T, x::S) where {T<:EnergyUnits, S<:Temperature} = uconvert(a, uconvert(K,x)*k)
-convert_units(a::T, x::S) where {T<:TemperatureUnits, S<:Energy} = uconvert(a, uconvert(J,x)/k)
-
-# Energy <--> Mass Conversion E = mc^2
-import Unitful: Mass, MassUnits
-convert_units(a::T, x::S) where {T<:EnergyUnits, S<:Mass} = uconvert(a, uconvert(kg,x)*c0^2)/c^2
-
-# Energy <--> Wavelength
-import Unitful: Length, LengthUnits
-convert_units(a::T, x::S) where {T<:EnergyUnits, S<:Length} = uconvert(a, (h*c0)/uconvert(m,x))
-convert_units(a::T, x::S) where {T<:LengthUnits, S<:Energy} = uconvert(a, (h*c0)/uconvert(J,x))
-
-# Energy <--> Frequency
-import Unitful: Frequency, FrequencyUnits
-convert_units(a::T, x::S) where {T<:EnergyUnits, S<:Frequency} = uconvert(a, h*uconvert(Hz,x))
-convert_units(a::T, x::S) where {T<:FrequencyUnits, S<:Energy} = uconvert(a, uconvert(J,x)/h)
-
-export convert_units
+using Unitful
+import Unitful: c0, k, μ0, q, ϵ0, ε0, Z0, me, mp, mn, G, gn, h, ħ, μB, Na, R, σ, R∞, μB
 
 # Masses and Charges
 const AtomicMassUnit = uconvert(kg, 1u)
@@ -188,9 +157,8 @@ const ElectronChargeMassRatio = q/me
 export ElementaryCharge, ElectronChargeMassRatio
 
 const BoltzmannConstant = k
-const kB = k
 const StephanBoltzmannConstant = σ
-export BolzmannConstant, StephanBoltzmannConstant
+export BoltzmannConstant, StephanBoltzmannConstant
 
 const SpeedOfLightInVacuum = c0
 const PermittivityOfFreeSpace = ε0
@@ -271,3 +239,5 @@ const KJ = JosephsonConstant
 const VonKlitzingConstant = uconvert(Ω, h/q^2)
 const RK = VonKlitzingConstant
 export Cs133HyperfineTransitionFrequency, LuminousEfficacy, JosephsonConstant, VonKlitzingConstant
+
+end

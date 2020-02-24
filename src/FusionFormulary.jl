@@ -1,8 +1,10 @@
 module FusionFormulary
 
 using Reexport
-@reexport using Unitful
 
+include("units.jl")
+@reexport using ..Units
 include("constants.jl")
+@reexport using ..Constants
 
 end # module
