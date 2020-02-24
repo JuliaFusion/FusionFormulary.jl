@@ -14,29 +14,29 @@ export Gs
 
 # Basic Unit Conversion
 import Unitful: uconvert
-unit_convert(a, x) = uconvert(a,x)
+convert_units(a, x) = uconvert(a,x)
 
 # Temperature <--> Energy Conversion 1 J = k_b * 1 K
 import Unitful: Energy, EnergyUnits
 import Unitful: Temperature, TemperatureUnits
-unit_convert(a::T, x::S) where {T<:EnergyUnits, S<:Temperature} = uconvert(a, uconvert(K,x)*k)
-unit_convert(a::T, x::S) where {T<:TemperatureUnits, S<:Energy} = uconvert(a, uconvert(J,x)/k)
+convert_units(a::T, x::S) where {T<:EnergyUnits, S<:Temperature} = uconvert(a, uconvert(K,x)*k)
+convert_units(a::T, x::S) where {T<:TemperatureUnits, S<:Energy} = uconvert(a, uconvert(J,x)/k)
 
 # Energy <--> Mass Conversion E = mc^2
 import Unitful: Mass, MassUnits
-unit_convert(a::T, x::S) where {T<:EnergyUnits, S<:Mass} = uconvert(a, uconvert(kg,x)*c0^2)/c^2
+convert_units(a::T, x::S) where {T<:EnergyUnits, S<:Mass} = uconvert(a, uconvert(kg,x)*c0^2)/c^2
 
 # Energy <--> Wavelength
 import Unitful: Length, LengthUnits
-unit_convert(a::T, x::S) where {T<:EnergyUnits, S<:Length} = uconvert(a, (h*c0)/uconvert(m,x))
-unit_convert(a::T, x::S) where {T<:LengthUnits, S<:Energy} = uconvert(a, (h*c0)/uconvert(J,x))
+convert_units(a::T, x::S) where {T<:EnergyUnits, S<:Length} = uconvert(a, (h*c0)/uconvert(m,x))
+convert_units(a::T, x::S) where {T<:LengthUnits, S<:Energy} = uconvert(a, (h*c0)/uconvert(J,x))
 
 # Energy <--> Frequency
 import Unitful: Frequency, FrequencyUnits
-unit_convert(a::T, x::S) where {T<:EnergyUnits, S<:Frequency} = uconvert(a, h*uconvert(Hz,x))
-unit_convert(a::T, x::S) where {T<:FrequencyUnits, S<:Energy} = uconvert(a, uconvert(J,x)/h)
+convert_units(a::T, x::S) where {T<:EnergyUnits, S<:Frequency} = uconvert(a, h*uconvert(Hz,x))
+convert_units(a::T, x::S) where {T<:FrequencyUnits, S<:Energy} = uconvert(a, uconvert(J,x)/h)
 
-export unit_convert
+export convert_units
 
 # Masses and Charges
 const AtomicMassUnit = uconvert(kg, 1u)
