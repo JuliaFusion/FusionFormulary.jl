@@ -1,6 +1,6 @@
 name = "FusionFormulary"
 uuid = "32bd13c7-60a2-40fd-af9e-018e9fd8fd8f"
-authors = ["Luke Stagner\n <lstagner@uci.edu>"]
+authors = ["Luke Stagner\n <stagnerl@fusion.gat.com>"]
 version = "0.1.0"
 
 [deps]
