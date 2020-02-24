@@ -163,8 +163,8 @@ export BoltzmannConstant, StephanBoltzmannConstant
 const SpeedOfLightInVacuum = c0
 const PermittivityOfFreeSpace = ε0
 const PermeabilityOfFreeSpace = μ0
-const ImpedanceOfVacumm = Z0
-export SpeedofLightInVacuum, PermittivityOfFreeSpace, PermeabilityOfFreeSpace, ImpedanceOfVacuum
+const ImpedanceOfVacuum = Z0
+export SpeedOfLightInVacuum, PermittivityOfFreeSpace, PermeabilityOfFreeSpace, ImpedanceOfVacuum
 
 const RydbergConstant = R∞
 const Ry = 13.605693122994eV

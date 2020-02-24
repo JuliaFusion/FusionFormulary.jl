@@ -4,7 +4,7 @@ import Unitful
 using Unitful: @unit
 
 # Re-export units
-import Unitful: nm, m, cm, s, kg, g, eV, keV, MeV, c, u, b, C, J, A, Hz, rad, T, V, Ω, W, K, Pa, angstrom, Å, cal, atm, Torr, mol, lm
+import Unitful: nm, m, cm, s, kg, g, eV, keV, MeV, c, u, b, C, J, A, H, Hz, rad, T, V, Ω, W, K, Pa, angstrom, Å, cal, atm, Torr, mol, lm
 import Unitful: k, h, c0
 
 # Define New Units
@@ -12,7 +12,7 @@ import Unitful: k, h, c0
 @unit kB     "kB"    Boltzmann          k         false
 @unit hc     "hc"   PlanckLight        h*c0       false
 
-export nm, m, cm, s, kg, g, eV, keV, MeV, c, u, b, C, J, A, Hz, rad, T, V, Ω, W, K, Pa, angstrom, Å, cal, atm, Torr, mol, lm
+export nm, m, cm, s, kg, g, eV, keV, MeV, c, u, b, C, J, A, Hz, H, rad, T, V, Ω, W, K, Pa, angstrom, Å, cal, atm, Torr, mol, lm
 export Gs, kB, hc
 
 #Register Units
